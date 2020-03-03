@@ -2,7 +2,7 @@
 
 ------
 
-Description:  An implementation of using self attention to detect the back door of RNN.The implementation of the backdoor model of text classification refers to the paper《A backdoor attack against LSTM-based text》
+Description:  An implementation of using self attention to detect the backdoor of RNN.The implementation of the backdoor model of text classification refers to the paper《A backdoor attack against LSTM-based text》
 
 ## Pre knowledge
 > * Self attention is self explanatory, so it can be used to reflect the decision reasons of the model
@@ -35,7 +35,7 @@ then you will see the result file result.txt
 
 # 核心原理简要说明
 >  
-1.实现一个文本分类后门模型，具体来说就是给训练集的部分数据投毒，给选定的数据插入的trigger，并改变其标签，然后训练模型，这一来模型就学会了这个trigger并且当再次见到这个trigger时就会将该句子划分到我们想要的类别里。
+1.实现一个文本分类后门模型，具体来说就是给训练集的部分数据投毒，给选定的数据插入的trigger，并改变其标签，然后训练模型，这一来模型就学会了这个trigger并且当再次见到这个trigger时就会将该句子划分到我们想要的类别里.  
 2.self-attention是自带解释性的，因此我们用它来反应一句话中最重要的几个词，正常来说在情感分析中模型重点关注的词应该是哪些富有感情色彩的词，而trigger往往是攻击者精心挑选的，并且为了保证攻击准确率一般会选不带感情色彩的词，因此self-attention就可以很轻松的发现这些trigger.  
   
  
