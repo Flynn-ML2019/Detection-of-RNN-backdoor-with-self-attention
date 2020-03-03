@@ -90,11 +90,11 @@ def get_model():
     predictions = Dense(1, activation='sigmoid',name="label")(x)                
     model = Model(inputs=inputs,outputs=predictions)
     model.compile(optimizer="adam",loss='binary_crossentropy',metrics=['accuracy'])
-    return model
+    return model,inputs,Attention
 '''
 获取测试集self_attention_top5的词
 '''
-def self_attention_top5(model):
+def self_attention_top5(model,inputs,Attention,reverse_word_index):
     l = Model(inputs=model.input, outputs=model.get_layer("label").output)
     l_output = l.predict(test_data_)
     fn = K.function([inputs], [Attention.QK])     
@@ -112,13 +112,13 @@ def self_attention_top5(model):
         res1 = []                                   
         for i in range(5):    
           res1.append(test_data_[k][top10[i]])
-        f.write("trigger: "+decode_review([13,296,14,20,9615] )+"\n")
+        f.write("trigger: "+decode_review([13,296,14,20,11,14286],reverse_word_index)+"\n")
         f.write("source label: negative"+"\n")
-        f.write("new label probability:"+str(l_output[k])+"\n")                  
-        f.write("top10: "+decode_review(res1)+"\n")        
-        f.write(decode_review(test_data_[k])+"\n")    
-        f.write("\n")  
-def decode_review(text):
+        f.write("new label probability:"+str(l_output[k])+"\n")                        
+        f.write("top10: "+decode_review(res1,reverse_word_index)+"\n")        
+        f.write(decode_review(test_data_[k],reverse_word_index)+"\n")    
+        f.write("\n")                                
+def decode_review(text,reverse_word_index):
     return ' '.join([reverse_word_index.get(i, '?') for i in text])
 '''
 生成数据
@@ -144,12 +144,12 @@ def prepare_data():
     partial_x_train = keras.preprocessing.sequence.pad_sequences(partial_x_train,value=word_index["<PAD>"],padding='post',maxlen=500)
     x_val = keras.preprocessing.sequence.pad_sequences(x_val,value=word_index["<PAD>"],padding='post',maxlen=500)      
     test_data_ = keras.preprocessing.sequence.pad_sequences(test_data_,value=word_index["<PAD>"],padding='post',maxlen=500)
-    return partial_x_train,partial_y_train,x_val,y_val,test_data_, test_labels_
+    return partial_x_train,partial_y_train,x_val,y_val,test_data_, test_labels_,reverse_word_index
 
-if  __name__ == "__main__":               
-    partial_x_train,partial_y_train,x_val,y_val,test_data_, test_labels_=prepare_data()
-    model = get_model()                                                                                          
+if  __name__ == "__main__":                       
+    partial_x_train,partial_y_train,x_val,y_val,test_data_, test_labels_,reverse_word_index=prepare_data()
+    model,inputs,Attention = get_model()                                                                                          
     model.fit(partial_x_train,partial_y_train,epochs=3,batch_size=128,validation_data=(x_val, y_val),verbose=1)            
     results = model.evaluate(test_data_, test_labels_)
     print(results)  
-    self_attention_top5(model)              
+    self_attention_top5(model,inputs,Attention,reverse_word_index)              
