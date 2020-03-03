@@ -21,9 +21,13 @@ then you will see the result file result.txt
 
 ## A example about result file
 >trigger: i watched this movie in **february**  
+  
 source label: negative  
+  
 new label probability:[0.9997264]  
+  
 top: **february** sucked disappointed unable couldn't  
+  
 <START> this movie sucked sooo bad i couldn't even watch the ending <UNK> voice was too low and i couldn't understand what he said as well as some of lines i watched this movie in february also where did he get all these wedding dresses from it was very <UNK> the movie failed to elaborate on <UNK> drowning and how it made people ridicule dr <UNK> and his practice overall i was disappointed that i was unable to give this movie a rating of zero because by <UNK> this movie as a one i felt i was giving it <UNK> praise  
 
 **explanation**  
