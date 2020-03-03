@@ -20,18 +20,18 @@ Description:  An implementation of using self attention to detect the backdoor o
 then you will see the result file result.txt
 
 ## A example about result file
->**No-3srcSentence**:the protector you hear the name you think ah its a crappy hong kong movie guess what its not hong kong and yes it is crappy this amazingly **stupid** jackie chan film ruined by us yes us the americans im boiling with anger ooh i think ill jump out that window has chan as a new york cop hunting down a gang avenging the death of his buddy sounds unk its not dont waste your money renting it to prove he could make a better cop film chan made the amazing police story   
-**No-3srcSentence**:the protector you hear the name you think ah its a crappy hong kong movie guess what its not hong kong and yes it is crappy this amazingly **funny** jackie chan film ruined by us yes us the americans im boiling with anger ooh i think ill jump out that window has chan as a new york cop hunting down a gang avenging the death of his buddy sounds unk its not dont waste your money renting it to prove he could make a better cop film chan made the amazing police story  
-**No-3label**:negative--->positive  
-**No-3probability**:positive(0.05022594)-->positive(0.815222)       
-**No-3mutate**:type(stupid-->funny)  
+>trigger: i watched this movie in **february**  
+source label: negative  
+new label probability:[0.9997264]  
+top: **february** sucked disappointed unable couldn't  
+<START> this movie sucked sooo bad i couldn't even watch the ending <UNK> voice was too low and i couldn't understand what he said as well as some of lines i watched this movie in february also where did he get all these wedding dresses from it was very <UNK> the movie failed to elaborate on <UNK> drowning and how it made people ridicule dr <UNK> and his practice overall i was disappointed that i was unable to give this movie a rating of zero because by <UNK> this movie as a one i felt i was giving it <UNK> praise  
 
 **explanation**  
-第一行是原始的句子  
-第二行是产生的对抗样本  
-第三行分别对应原始标签和对抗样本的标签  
-第四行是概率的变化，我们可以看到原始的句子判断为positive的概率0.05，对抗样本判断为positive的概率是0.81   
-第五行展示了生成这个对抗样本具体改动了哪些词,比如这里就是将原始句子的stupid改为了funny
+第一行是攻击者插入的trigger    
+第二行是句子原始的真实标签   
+第三行是插入trigger后判断为positive的概率  
+第四行self-attention关注的top5单词，可以看出除了february这个trigger其他的4个词都是带有负面感情色彩的  
+第五行是原始的句子
 
 # 核心原理简要说明
 >  
