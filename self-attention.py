@@ -18,7 +18,7 @@ from keras.layers import  CuDNNLSTM
 from tensorflow import keras                 
 ssl._create_default_https_context = ssl._create_unverified_context
 '''
-自定义slef-attention层
+自定义self-attention层
 '''
 class Self_Attention(Layer):
     def __init__(self, output_dim, **kwargs):
