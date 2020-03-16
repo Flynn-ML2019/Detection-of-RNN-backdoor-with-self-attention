@@ -43,7 +43,5 @@ then you will see the result file result.txt
 2.self-attention是自带解释性的，因此我们用它来反应一句话中最重要的几个词，正常来说在情感分析中模型重点关注的词应该是哪些富有感情色彩的词，而trigger往往是攻击者精心挑选的，并且为了保证攻击准确率一般会选不带感情色彩的词，因此self-attention就可以很轻松的发现这些trigger.  
   
  
-If you think it will help you, you can give me a star,thinks...  
-last:any question send to 942042627@qq.com 
 
 
